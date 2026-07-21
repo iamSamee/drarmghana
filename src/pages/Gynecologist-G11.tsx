@@ -265,7 +265,7 @@ export default function GynecologistG11() {
               <img src="/logo.webp" alt="Dr. Armghana Ali" className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
-              <div className="font-bold text-gray-900 text-[13px]">Dr. Armghana Ali</div>
+              <div className="font-bold text-gray-900 text-[13px]">Dr. Armghana</div>
               <div className="text-gray-500 text-[10px]">Gynecologist in Islamabad</div>
             </div>
           </div>
