@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { LazyMapEmbed } from "@/components/LazyMapEmbed";
 import {
   trackPhoneCall,
   trackWhatsAppClick,
@@ -693,15 +694,10 @@ export default function GynecologistG11() {
             {/* Map embed */}
             <div className="space-y-3">
               <div className="rounded-3xl overflow-hidden shadow-card h-[360px]">
-                <iframe
+                <LazyMapEmbed
                   src={saeedEmbedSrc}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
                   title="Dr. Armghana Ali — Saeed International Hospital G-11"
+                  label="Saeed International Hospital, G-11 Markaz"
                 />
               </div>
               <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer"

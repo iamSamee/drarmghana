@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { LazyMapEmbed } from "@/components/LazyMapEmbed";
 import {
   trackPhoneCall,
   trackWhatsAppClick,
@@ -676,7 +677,11 @@ export default function gynecologistIslamabad() {
           <div className="grid lg:grid-cols-[1fr_380px] gap-6 items-start max-w-5xl mx-auto">
             <div className="space-y-3">
               <div className="rounded-3xl overflow-hidden shadow-card h-[360px]">
-                <iframe src={hyaatEmbedSrc} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Dr. Armghana Ali — Hyaat International Hospital G-13" />
+                <LazyMapEmbed
+                  src={hyaatEmbedSrc}
+                  title="Dr. Armghana Ali — Hyaat International Hospital G-13"
+                  label="Hyaat International Hospital, G-13/1"
+                />
               </div>
               <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-colors shadow-md">
