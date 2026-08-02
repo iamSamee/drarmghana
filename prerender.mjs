@@ -4,6 +4,9 @@ import { join } from 'path';
 const dist = 'dist';
 const base = readFileSync(join(dist, 'index.html'), 'utf-8');
 
+// SSR bundle built by `vite build --ssr src/entry-server.tsx --outDir dist-server`
+const { render } = await import('./dist-ssr/entry-server.js');
+
 const routes = [
   {
     dir: 'gynecologist-islamabad',
@@ -22,6 +25,8 @@ const routes = [
 for (const route of routes) {
   const dir = join(dist, route.dir);
   mkdirSync(dir, { recursive: true });
+
+  const appHtml = render(`/${route.dir}`);
 
   let html = base
     .replace(
@@ -47,6 +52,24 @@ for (const route of routes) {
     .replace(
       /(<meta property="og:description" content=")[^"]*(")/,
       `$1${route.description}$2`
+    )
+    // These hero-image preloads are homepage-specific (10.webp/1.webp) — the
+    // landing pages render heroImage.webp, so preloading the wrong image both
+    // wastes bandwidth and leaves the actual LCP image un-preloaded.
+    .replace(
+      /\s*<link rel="preload" as="image" href="\/10\.webp"[^>]*\/>\n?/,
+      ''
+    )
+    .replace(
+      /\s*<link rel="preload" as="image" href="\/1\.webp"[^>]*\/>\n?/,
+      '\n  <link rel="preload" as="image" href="/heroImage.webp" />\n'
+    )
+    // Inject the real, fully rendered page markup so crawlers, ad-quality
+    // evaluators, and the first paint all see actual content — not an empty
+    // shell waiting on JS. main.tsx hydrates onto this instead of re-rendering.
+    .replace(
+      '<div id="root"></div>',
+      `<div id="root">${appHtml}</div>`
     );
 
   writeFileSync(join(dir, 'index.html'), html);

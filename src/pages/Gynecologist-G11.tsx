@@ -68,10 +68,11 @@ const services = [
 ];
 
 const reviews = [
-  { name: "Fatima K.", rating: 5, date: "2 months ago", text: "Dr. Armghana is an excellent doctor. Very caring and professional. She made my experience so comfortable. Her clinic in G-13 is easy to find and the staff is very helpful. Highly recommend." },
-  { name: "Ayesha M.", rating: 5, date: "3 months ago", text: "Best gynecologist in the G-13 area. She listens carefully to all concerns and provides detailed explanations without rushing. I felt completely at ease. Highly recommended!" },
-  { name: "Sara A.", rating: 5, date: "1 month ago", text: "Very satisfied with the visit. The clinic at Hyaat Hospital is clean and easy to access. Dr. Armghana is very experienced, kind, and made me feel comfortable throughout." },
-  { name: "Nadia S.", rating: 5, date: "2 months ago", text: "Finally found a gynecologist who listens. She addressed all my concerns with patience and gave me a clear plan. Getting directions from Google Maps was easy — right inside Hyaat Hospital." },
+  { name: "Manam Fatima", rating: 5, text: "I used to have a lot of period pain and I used to think it's normal. One day, I saw her video on Instagram where she explained that it can indicate some underlying issue too. I booked an appointment with her and she actually diagnosed the underlying issue and now I can't thank her enough how relieved I am." },
+  { name: "Alvina Fatima", rating: 5, text: "Dr. Armaghana Ali is an excellent listener. I cannot thanks to Dr. Armaghana enough for her support during my pregnancy. Her expertise and calm nature. She is incredibly knowledgeable and attentive. She took the time to answer all my questions and explained my treatment options very clearly. Truly one of the best gynecologist." },
+  { name: "Shaukat Nawaz", rating: 5, text: "She is an extremely talented and polite Gynaecologist. Listen's to the problems thoroughly and calms the patient till the point she is satisfied. My wife was extremely upset and we were having very bad days, and she helped us out of it through the entire phase. She was always available whenever we needed her. I can't thank her enough for her services. Highly recommend!" },
+  { name: "Afshan", rating: 5, text: "Dr. Armghana is a very kind and lovely doctor. She always talks to her patients with great understanding and a smiling face, which I personally like a lot. Especially during my difficult time, she encouraged me, gave me strength, and explained everything very thoroughly to help solve my problem. She also responds quickly on mobile. Thank you so much Dr. Armghana Ali. Highly recommended from my side." },
+  { name: "Ayesha Maryam", rating: 5, text: "The best doc the best listener. I told my whole story. She listened very carefully and answered my all questions and doubt. The best one." },
 ];
 
 const faqs = [
@@ -838,7 +839,7 @@ export default function GynecologistG11() {
                 { icon: Users, value: "800+", label: "Patients Treated", sub: "& counting" },
                 { icon: Award, value: "12+", label: "Years Experience", sub: "MBBS · FCPS" },
                 { icon: Building, value: "2", label: "Clinic Locations", sub: "G-13 & G-11" },
-                { icon: Star, value: "5.0", label: "Google Rating", sub: "Verified reviews" },
+                { icon: Star, value: "5.0", label: "Google Rating", sub: "6 reviews" },
               ].map((s, i) => (
                 <div key={i} className="p-5 rounded-2xl bg-gradient-to-br from-primary-light to-accent/30 border border-primary/15 text-center space-y-1">
                   <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-2">
@@ -910,7 +911,7 @@ export default function GynecologistG11() {
               <span className="font-display font-bold text-4xl text-foreground">5.0</span>
               <div className="text-left">
                 <Stars size="w-5 h-5" />
-                <p className="text-sm text-muted-foreground mt-0.5">Based on Google Reviews</p>
+                <p className="text-sm text-muted-foreground mt-0.5">Based on 6 Google Reviews</p>
               </div>
             </div>
           </div>
@@ -929,7 +930,6 @@ export default function GynecologistG11() {
                     </div>
                     <span className="font-semibold text-sm text-foreground">{r.name}</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">{r.date}</span>
                 </div>
               </div>
             ))}

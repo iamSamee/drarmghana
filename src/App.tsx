@@ -1,17 +1,19 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import ServiceDetail from "./pages/ServiceDetail";
-import TestPage from "./pages/TestPage";
-import GynecologistIslamabad from "./pages/Gynecologist-Islamabad.tsx";
-import GynecologistG11 from "./pages/Gynecologist-G11";
 
-const App = () => (
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
+const TestPage = lazy(() => import("./pages/TestPage"));
+const GynecologistIslamabad = lazy(() => import("./pages/Gynecologist-Islamabad"));
+const GynecologistG11 = lazy(() => import("./pages/Gynecologist-G11"));
+
+export const AppRoutes = () => (
   <TooltipProvider>
     <Toaster />
-    <BrowserRouter>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/gynecologist-islamabad" element={<GynecologistIslamabad />} />
@@ -21,8 +23,14 @@ const App = () => (
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </Suspense>
   </TooltipProvider>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppRoutes />
+  </BrowserRouter>
 );
 
 export default App;
