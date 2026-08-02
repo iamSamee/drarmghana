@@ -288,7 +288,7 @@ export default function gynecologistIslamabad() {
           {/* Logo + Name */}
           <div className="flex items-center gap-2.5 flex-shrink-0">
             <div className="w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0 bg-gray-900 border-2 border-gray-800">
-              <img src="/logo.webp" alt="Dr. Armghana Ali" className="w-full h-full object-cover" />
+              <img src="/logo.webp" alt="Dr. Armghana Ali" width={220} height={220} className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
               <div className="font-bold text-gray-900 text-[15px]">Dr. Armghana Ali</div>
@@ -350,7 +350,7 @@ export default function gynecologistIslamabad() {
 
               {/* Mobile: doctor image – absolute top-right */}
               <div className="absolute top-0 right-0 w-[44%] lg:hidden" style={{ zIndex: 2 }}>
-                <img src="/heroImage.webp" alt="Dr. Armghana Ali" className="w-full object-contain" style={{ maxHeight: "320px", objectPosition: "top center" }} />
+                <img src="/heroImage.webp" alt="Dr. Armghana Ali" width={732} height={1100} className="w-full object-contain" style={{ maxHeight: "320px", objectPosition: "top center" }} />
               </div>
 
               {/* Mobile: location badge */}
@@ -454,6 +454,8 @@ export default function gynecologistIslamabad() {
                   <img
                     src="/Hyaat.webp"
                     alt="Hyaat International Hospital"
+                    width={480}
+                    height={300}
                     className="w-full h-[100px] sm:h-[110px] object-cover hover:opacity-80 transition-opacity"
                   />
                 </a>
@@ -488,6 +490,8 @@ export default function gynecologistIslamabad() {
                   <img
                     src="/Saeed.webp"
                     alt="Saeed International Hospital"
+                    width={480}
+                    height={300}
                     className="w-full h-[100px] sm:h-[110px] object-cover hover:opacity-80 transition-opacity"
                   />
                 </a>
@@ -556,6 +560,7 @@ export default function gynecologistIslamabad() {
               {/* Doctor image */}
               <div className="flex-1 flex items-end justify-center w-full">
                 <img src="/heroImage.webp" alt="Dr. Armghana Ali – Gynecologist in Islamabad"
+                  width={732} height={1100}
                   className="w-full object-contain object-bottom relative"
                   style={{ maxHeight: "500px", maxWidth: "440px", zIndex: 0 }} />
               </div>
@@ -1081,7 +1086,7 @@ export default function gynecologistIslamabad() {
       {/* ═══════════════════ FOOTER ═══════════════════ */}
       <footer className="bg-[hsl(340,75%,15%)] text-white/70 py-10">
         <div className="container mx-auto px-4 text-center space-y-3">
-          <img src="/logo.webp" alt="Dr. Armghana Ali" className="h-16 w-auto mx-auto opacity-90 rounded-full" />
+          <img src="/logo.webp" alt="Dr. Armghana Ali" width={220} height={220} className="h-16 w-auto mx-auto opacity-90 rounded-full" />
           <p className="font-display font-bold text-white text-lg">Dr. Armghana Ali — MBBS, FCPS</p>
           <p className="text-sm">Best Female Gynecologist in Islamabad · Lady Doctor · Top Gynae Clinic · G-13 &amp; G-11</p>
           <p className="text-sm">Hyaat International Hospital, G-13/1 &nbsp;·&nbsp; Saeed International Hospital, G-11 Markaz, Islamabad</p>

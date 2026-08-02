@@ -263,7 +263,7 @@ export default function GynecologistG11() {
           {/* Logo + Name */}
           <div className="flex items-center gap-2.5 flex-shrink-0">
             <div className="w-[42px] h-[42px] rounded-lg overflow-hidden flex-shrink-0 bg-gray-900">
-              <img src="/logo.webp" alt="Dr. Armghana Ali" className="w-full h-full object-cover" />
+              <img src="/logo.webp" alt="Dr. Armghana Ali" width={220} height={220} className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
               <div className="font-bold text-gray-900 text-[13px]">Dr. Armghana</div>
@@ -368,6 +368,8 @@ export default function GynecologistG11() {
                 <img
                   src="/heroImage.webp"
                   alt="Dr. Armghana Ali – Gynecologist"
+                  width={732}
+                  height={1100}
                   className="w-full object-contain"
                   style={{ maxHeight: '300px', objectPosition: 'top center' }}
                 />
@@ -461,7 +463,7 @@ export default function GynecologistG11() {
                 </div>
                 <div className="flex gap-3 items-start mb-3">
                   <a href={SAEED_MAPS} target="_blank" rel="noopener noreferrer" className="w-[90px] flex-shrink-0 rounded-xl overflow-hidden bg-gray-100 block">
-                    <img src="/Saeed.webp" alt="Saeed International Hospital G-11" className="w-full h-[68px] object-cover hover:opacity-80 transition-opacity" />
+                    <img src="/Saeed.webp" alt="Saeed International Hospital G-11" width={480} height={300} className="w-full h-[68px] object-cover hover:opacity-80 transition-opacity" />
                   </a>
                   <div className="pt-0.5">
                     <div className="flex items-start gap-1.5 mb-1">
@@ -517,6 +519,8 @@ export default function GynecologistG11() {
               <img
                 src="/heroImage.webp"
                 alt="Dr. Armghana Ali – Gynecologist in Islamabad"
+                width={732}
+                height={1100}
                 className="relative w-full object-contain object-top"
                 style={{ maxHeight: '680px', maxWidth: '480px', zIndex: 2 }}
               />
@@ -548,6 +552,8 @@ export default function GynecologistG11() {
                   <img
                     src="/Saeed.webp"
                     alt="Saeed International Hospital G-11"
+                    width={480}
+                    height={300}
                     className="w-full h-[100px] sm:h-[110px] object-cover hover:opacity-80 transition-opacity"
                   />
                 </a>
@@ -1150,7 +1156,7 @@ export default function GynecologistG11() {
       ════════════════════════════════════════════════════════ */}
       <footer className="bg-[hsl(340,75%,15%)] text-white/70 py-10">
         <div className="container mx-auto px-4 text-center space-y-3">
-          <img src="/logo.webp" alt="Dr. Armghana Ali" className="h-16 w-auto mx-auto opacity-90 rounded-full" />
+          <img src="/logo.webp" alt="Dr. Armghana Ali" width={220} height={220} className="h-16 w-auto mx-auto opacity-90 rounded-full" />
           <p className="font-display font-bold text-white text-lg">Dr. Armghana Ali — MBBS, FCPS</p>
           <p className="text-sm">
             Female Gynecologist Near You · G-11 Islamabad · Lady OBGYN · Nearest Gynae Clinic G-11

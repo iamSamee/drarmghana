@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 const dist = 'dist';
@@ -6,6 +6,16 @@ const base = readFileSync(join(dist, 'index.html'), 'utf-8');
 
 // SSR bundle built by `vite build --ssr src/entry-server.tsx --outDir dist-server`
 const { render } = await import('./dist-ssr/entry-server.js');
+
+// Find the current build's hashed filenames for the two heaviest-used latin
+// font weights (bold headings, regular body) so they can be preloaded —
+// shortens the CSS-discovery-then-font-fetch chain that was dominating LCP.
+const assetFiles = readdirSync(join(dist, 'assets'));
+const findFont = (pattern) => assetFiles.find((f) => pattern.test(f) && f.endsWith('.woff2'));
+const criticalFonts = [
+  findFont(/^montserrat-latin-700-normal-/),
+  findFont(/^dm-sans-latin-400-normal-/),
+].filter(Boolean);
 
 const routes = [
   {
@@ -63,6 +73,14 @@ for (const route of routes) {
     .replace(
       /\s*<link rel="preload" as="image" href="\/1\.webp"[^>]*\/>\n?/,
       '\n  <link rel="preload" as="image" href="/heroImage.webp" />\n'
+    )
+    // Preload the critical fonts so the browser fetches them alongside the
+    // CSS/JS instead of only discovering them once the CSS has parsed.
+    .replace(
+      '</head>',
+      `${criticalFonts
+        .map((f) => `  <link rel="preload" as="font" type="font/woff2" href="/assets/${f}" crossorigin />\n`)
+        .join('')}</head>`
     )
     // Inject the real, fully rendered page markup so crawlers, ad-quality
     // evaluators, and the first paint all see actual content — not an empty
