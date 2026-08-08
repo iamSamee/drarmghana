@@ -3,7 +3,11 @@ import { useLocation } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 
+const About = lazy(() => import("@/components/About").then(m => ({ default: m.About })));
+const GynecologyServices = lazy(() => import("@/components/GynecologyServices").then(m => ({ default: m.GynecologyServices })));
 const Timings = lazy(() => import("@/components/Timings").then(m => ({ default: m.Timings })));
+const VisitProcess = lazy(() => import("@/components/VisitProcess").then(m => ({ default: m.VisitProcess })));
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
 const Location = lazy(() => import("@/components/Location").then(m => ({ default: m.Location })));
 const Reviews = lazy(() => import("@/components/Reviews").then(m => ({ default: m.Reviews })));
 const Contact = lazy(() => import("@/components/Contact").then(m => ({ default: m.Contact })));
@@ -31,7 +35,11 @@ const Index = () => {
       <Navbar />
       <Hero />
       <Suspense fallback={null}>
+        <About />
+        <GynecologyServices />
         <Timings />
+        <VisitProcess />
+        <WhyChooseUs />
         <Location />
         <Reviews />
         <Contact />

@@ -118,7 +118,7 @@ export const About = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-accent to-primary-light opacity-10" />
               <img
                 src="/10.webp?v=1"
-                alt="Dr. Armghana - Professional Photo"
+                alt="Dr. Armghana Ali - Best Gynecologist in Islamabad"
                 className="w-full h-full object-cover relative z-10 transition-transform duration-700 hover:scale-105"
                 loading="lazy"
                 onError={(e) => {
@@ -163,34 +163,39 @@ export const About = () => {
             <div>
               <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">About Dr. Armghana</span>
+                <span className="text-sm font-semibold text-primary">About Dr. Armghana Ali</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 leading-tight">
-                Islamabad's Trusted <span className="text-gradient-shimmer">Gynecologist</span>
+                Meet Dr. Armghana Ali - Top <span className="text-gradient-shimmer">Gynecologist in Islamabad</span>
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Providing compassionate, evidence-based gynecological care for women at every stage of life
-              </p>
             </div>
 
             {/* Description */}
             <p className="text-base text-muted-foreground leading-relaxed">
-              Dr. Armghana Ali is a trusted gynecologist in Islamabad with extensive experience in Obstetrics and Gynecology. As a qualified lady doctor (MBBS, FCPS), she combines clinical excellence with a patient-centered approach that prioritizes comfort, clear communication, and personalized treatment plans.
+              Dr. Armghana Ali is a trusted gynecologist and obstetrician in Islamabad, with 12+ years of clinical experience treating pregnancy, PCOS, irregular periods, fertility concerns, and everyday women's health issues. As a qualified lady doctor (MBBS, FCPS in Obstetrics &amp; Gynecology), she combines clinical excellence with a patient-centered approach that prioritizes comfort, clear communication, and personalized treatment plans.
+            </p>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              She consults at Hyaat International Hospital (G-13) and Saeed International Hospital (G-11) in Islamabad, and also offers online consultations for patients who prefer to be seen remotely — making expert gynecological care accessible across Islamabad and Rawalpindi.
             </p>
 
-            {/* Credentials Grid - 2x2 */}
-            <div className="grid sm:grid-cols-2 gap-3">
-              {credentials.map((credential, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-card/60 backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-soft hover:-translate-y-0.5 group"
-                >
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center group-hover:scale-110 transition-transform ${credential.color}`}>
-                    <credential.icon className="w-5 h-5" />
+            {/* Qualifications & Experience */}
+            <div className="pt-2">
+              <h3 className="text-xl font-display font-semibold text-foreground mb-3">
+                Qualifications &amp; Experience
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {credentials.map((credential, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-card/60 backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-soft hover:-translate-y-0.5 group"
+                  >
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center group-hover:scale-110 transition-transform ${credential.color}`}>
+                      <credential.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-sm font-medium text-foreground">{credential.text}</span>
                   </div>
-                  <span className="text-sm font-medium text-foreground">{credential.text}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Stats Row */}

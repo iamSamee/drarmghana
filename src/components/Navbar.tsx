@@ -40,10 +40,10 @@ export const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="rounded-full logo overflow-hidden">
-              <img src="/logo.webp" alt="Dr. Armghana" className="w-full h-full object-cover" />
+              <img src="/logo.webp" alt="Dr. Armghana Ali" className="w-full h-full object-cover" />
             </div>
             <span className="font-display text-lg md:text-xl font-semibold">
-              Dr. <span className="text-gradient">Armghana</span>
+              Dr. <span className="text-gradient">Armghana Ali</span>
             </span>
           </Link>
 

@@ -141,7 +141,10 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/10 text-center">
+        <div className="pt-6 border-t border-white/10 text-center space-y-2">
+          <p className="text-primary-foreground/50 text-xs max-w-xl mx-auto leading-relaxed">
+            The information on this website is for general educational purposes only and does not replace professional medical advice. Please consult Dr. Armghana Ali directly for diagnosis or treatment.
+          </p>
           <p className="text-primary-foreground/60 text-sm">
             © {currentYear} Dr. Armghana Ali. All rights reserved.
           </p>
