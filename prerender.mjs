@@ -30,6 +30,12 @@ const routes = [
     title: 'Best Female Gynecologist Near Me in G-11 Islamabad | Dr. Armghana Ali – MBBS, FCPS',
     description: 'Best gynecologist near me in G-11 Islamabad — Dr. Armghana Ali (MBBS, FCPS), pregnancy care specialist & private gynaecologist at Saeed Hospital G-11 Markaz. Open 7 days. Book now.',
   },
+  {
+    dir: 'pregnancy-care-islamabad',
+    canonical: 'https://drarmghana.com/pregnancy-care-islamabad',
+    title: 'Pregnancy Care in Islamabad – Dr. Armghana Ali, FCPS',
+    description: 'Complete pregnancy care in Islamabad from Dr. Armghana Ali (MBBS, FCPS) — checkups, scans, and delivery planning at every stage. Book your visit today.',
+  },
 ];
 
 for (const route of routes) {
