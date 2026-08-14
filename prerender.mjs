@@ -17,6 +17,14 @@ const criticalFonts = [
   findFont(/^dm-sans-latin-400-normal-/),
 ].filter(Boolean);
 
+const injectFontPreloads = (html) =>
+  html.replace(
+    '</head>',
+    `${criticalFonts
+      .map((f) => `  <link rel="preload" as="font" type="font/woff2" href="/assets/${f}" crossorigin />\n`)
+      .join('')}</head>`
+  );
+
 const routes = [
   {
     dir: 'gynecologist-islamabad',
@@ -80,14 +88,6 @@ for (const route of routes) {
       /\s*<link rel="preload" as="image" href="\/1\.webp"[^>]*\/>\n?/,
       '\n  <link rel="preload" as="image" href="/heroImage.webp" />\n'
     )
-    // Preload the critical fonts so the browser fetches them alongside the
-    // CSS/JS instead of only discovering them once the CSS has parsed.
-    .replace(
-      '</head>',
-      `${criticalFonts
-        .map((f) => `  <link rel="preload" as="font" type="font/woff2" href="/assets/${f}" crossorigin />\n`)
-        .join('')}</head>`
-    )
     // Inject the real, fully rendered page markup so crawlers, ad-quality
     // evaluators, and the first paint all see actual content — not an empty
     // shell waiting on JS. main.tsx hydrates onto this instead of re-rendering.
@@ -96,8 +96,17 @@ for (const route of routes) {
       `<div id="root">${appHtml}</div>`
     );
 
+  html = injectFontPreloads(html);
+
   writeFileSync(join(dir, 'index.html'), html);
   console.log(`✓ Pre-rendered: /${route.dir}`);
 }
+
+// The homepage itself (dist/index.html) isn't in `routes` above — it's
+// intentionally left client-rendered rather than SSR-prerendered — but it
+// still ships the same @fontsource bundle, so it needs the same font
+// preloads to avoid the CSS-then-font discovery chain PageSpeed flags.
+writeFileSync(join(dist, 'index.html'), injectFontPreloads(base));
+console.log('✓ Patched homepage font preloads');
 
 console.log('Pre-rendering complete.');
