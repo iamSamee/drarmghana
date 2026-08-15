@@ -203,7 +203,7 @@ export const TestPage = () => {
               <div className="absolute top-[15%] left-[10%] right-[-5%] bottom-0 rounded-full bg-primary/[0.10]" />
               <img src="/heroImage.webp" alt="Dr. Armghana Ali — Gynecologist in Islamabad"
                 className="relative w-full max-h-[260px] sm:max-h-[360px] lg:max-h-[520px] object-cover object-top"
-                loading="eager" fetchPriority="high" />
+                loading="eager" {...{ fetchpriority: "high" }} />
             </div>
           </div>
         </div>

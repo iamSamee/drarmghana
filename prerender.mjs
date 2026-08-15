@@ -102,11 +102,14 @@ for (const route of routes) {
   console.log(`✓ Pre-rendered: /${route.dir}`);
 }
 
-// The homepage itself (dist/index.html) isn't in `routes` above — it's
-// intentionally left client-rendered rather than SSR-prerendered — but it
-// still ships the same @fontsource bundle, so it needs the same font
-// preloads to avoid the CSS-then-font discovery chain PageSpeed flags.
-writeFileSync(join(dist, 'index.html'), injectFontPreloads(base));
-console.log('✓ Patched homepage font preloads');
+// The homepage isn't in `routes` above since its metadata is already correct
+// in the base template — but it still needs its Navbar+Hero prerendered
+// (otherwise FCP/LCP wait on the full JS bundle to boot React) and the same
+// font preloads as the other routes.
+const homeHtml = injectFontPreloads(
+  base.replace('<div id="root"></div>', `<div id="root">${render('/')}</div>`)
+);
+writeFileSync(join(dist, 'index.html'), homeHtml);
+console.log('✓ Pre-rendered: / (homepage)');
 
 console.log('Pre-rendering complete.');

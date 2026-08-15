@@ -161,7 +161,7 @@ export const Hero = () => {
                   alt="Dr. Armghana Ali — Best Gynecologist in Islamabad"
                   className="w-full h-full object-cover"
                   loading="eager"
-                  fetchPriority="high"
+                  {...{ fetchpriority: "high" }}
                   onError={(e) => {
                     // Fallback to placeholder if image doesn't exist
                     const target = e.target as HTMLImageElement;
@@ -195,7 +195,7 @@ export const Hero = () => {
             alt="Dr. Armghana Ali — Gynecologist in Islamabad"
             className="w-full h-full object-cover"
             loading="eager"
-            fetchPriority="high"
+            {...{ fetchpriority: "high" }}
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" />
