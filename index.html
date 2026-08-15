@@ -20,28 +20,43 @@
 
     <title>Best Gynecologist in Islamabad | Dr. Armghana Ali</title>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NK5TQ6DB');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Meta Pixel Code -->
+    <!-- Google Tag Manager + Meta Pixel: the dataLayer array and fbq() queue
+         shim below are near-free (just define a queue), so they stay eager —
+         trackConversion()/fbq() calls from early clicks still queue correctly.
+         Only the actual gtm.js/fbevents.js downloads (the expensive part —
+         this is what shows up as CPU-busy time blocking LCP) are deferred to
+         idle time, since they don't need to be live before the browser is
+         done painting. -->
     <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+    n.queue=[];}(window,document,'script');
     fbq('init', '1550392949819318');
     fbq('track', 'PageView');
+
+    function loadDeferredThirdPartyScripts() {
+      var gtm = document.createElement('script');
+      gtm.async = true;
+      gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NK5TQ6DB&l=dataLayer';
+      document.head.appendChild(gtm);
+
+      var pixel = document.createElement('script');
+      pixel.async = true;
+      pixel.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(pixel);
+    }
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadDeferredThirdPartyScripts, { timeout: 2000 });
+    } else {
+      setTimeout(loadDeferredThirdPartyScripts, 1500);
+    }
     </script>
-    <!-- End Meta Pixel Code -->
 
   <meta name="description" content="Consult the best gynecologist in Islamabad for PCOS, pregnancy care and women's health. MBBS, FCPS qualified. Book your appointment today." />
 

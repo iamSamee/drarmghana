@@ -3,6 +3,13 @@ import { Users, Clock, Award, Phone } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { trackWhatsAppClick, trackPhoneCall } from "@/utils/tracking";
 
+// The desktop/mobile hero sections are both always in the DOM (one hidden via
+// CSS at a time), so a plain <img src> in the hidden one still downloads —
+// display:none doesn't stop a fetch. Each <picture>'s non-matching <img>
+// falls back to this instead of the real photo, which is a real request.
+const TRANSPARENT_PIXEL =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+
 
 const useCountUp = (end: number, duration: number = 2000) => {
   const [count, setCount] = useState(0);
@@ -156,20 +163,26 @@ export const Hero = () => {
             <div className="relative">
               {/* Main image container */}
               <div className="relative rounded-3xl overflow-hidden shadow-card aspect-[3/4] sm:aspect-[4/5]">
-                <img
-                  src="/10.webp"
-                  alt="Dr. Armghana Ali — Best Gynecologist in Islamabad"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                  {...{ fetchpriority: "high" }}
-                  onError={(e) => {
-                    // Fallback to placeholder if image doesn't exist
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const placeholder = target.nextElementSibling as HTMLElement;
-                    if (placeholder) placeholder.style.display = 'flex';
-                  }}
-                />
+                <picture>
+                  {/* This section is CSS-hidden below md, but a plain <img src>
+                      still downloads regardless of display:none — <source media>
+                      is what actually stops the browser from fetching it on mobile. */}
+                  <source media="(min-width: 768px)" srcSet="/10.webp" />
+                  <img
+                    src={TRANSPARENT_PIXEL}
+                    alt="Dr. Armghana Ali — Best Gynecologist in Islamabad"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    {...{ fetchpriority: "high" }}
+                    onError={(e) => {
+                      // Fallback to placeholder if image doesn't exist
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'flex';
+                    }}
+                  />
+                </picture>
                 <div className="absolute inset-0 hidden items-center justify-center bg-gradient-to-br from-primary-light to-accent" style={{ display: 'none' }}>
                   <div className="text-center p-8">
                     <div className="w-32 h-32 mx-auto rounded-full gradient-primary flex items-center justify-center mb-6">
@@ -190,13 +203,16 @@ export const Hero = () => {
       <section id="home-mobile" className="block md:hidden relative h-[calc(100dvh-6.5rem)] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src="/1.webp"
-            alt="Dr. Armghana Ali — Gynecologist in Islamabad"
-            className="w-full h-full object-cover"
-            loading="eager"
-            {...{ fetchpriority: "high" }}
-          />
+          <picture>
+            <source media="(max-width: 767px)" srcSet="/1.webp" />
+            <img
+              src={TRANSPARENT_PIXEL}
+              alt="Dr. Armghana Ali — Gynecologist in Islamabad"
+              className="w-full h-full object-cover"
+              loading="eager"
+              {...{ fetchpriority: "high" }}
+            />
+          </picture>
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" />
         </div>
