@@ -86,7 +86,7 @@ for (const route of routes) {
     )
     .replace(
       /\s*<link rel="preload" as="image" href="\/1\.webp"[^>]*\/>\n?/,
-      '\n  <link rel="preload" as="image" href="/heroImage.webp" />\n'
+      '\n  <link rel="preload" as="image" href="/heroImage.webp" fetchpriority="high" />\n'
     )
     // Inject the real, fully rendered page markup so crawlers, ad-quality
     // evaluators, and the first paint all see actual content — not an empty
