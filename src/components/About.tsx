@@ -116,18 +116,24 @@ export const About = () => {
             {/* Main Image Container */}
             <div className="relative rounded-3xl overflow-hidden shadow-card aspect-[3/4] bg-gradient-to-br from-accent/20 to-primary-light/20 backdrop-blur-sm border-2 border-primary/10">
               <div className="absolute inset-0 bg-gradient-to-br from-accent to-primary-light opacity-10" />
-              <img
-                src="/about-photo.webp"
-                alt="Dr. Armghana Ali - Best Gynecologist in Islamabad"
-                className="w-full h-full object-cover relative z-10 transition-transform duration-700 hover:scale-105"
-                loading="lazy"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const placeholder = target.nextElementSibling as HTMLElement;
-                  if (placeholder) placeholder.style.display = 'flex';
-                }}
-              />
+              <picture>
+                {/* This column is full-width below lg (1024px, where the grid
+                    goes 2-up) — serve the smaller crop there instead of the
+                    desktop-sized asset. */}
+                <source media="(min-width: 1024px)" srcSet="/about-photo.webp" />
+                <img
+                  src="/about-photo-mobile.webp"
+                  alt="Dr. Armghana Ali - Best Gynecologist in Islamabad"
+                  className="w-full h-full object-cover relative z-10 transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const placeholder = target.nextElementSibling as HTMLElement;
+                    if (placeholder) placeholder.style.display = 'flex';
+                  }}
+                />
+              </picture>
               <div className="absolute inset-0 hidden items-center justify-center bg-gradient-to-br from-accent to-primary-light" style={{ display: 'none' }}>
                 <div className="text-center p-8">
                   <div className="w-24 h-24 mx-auto rounded-full gradient-primary flex items-center justify-center mb-4">
