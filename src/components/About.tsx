@@ -117,7 +117,7 @@ export const About = () => {
             <div className="relative rounded-3xl overflow-hidden shadow-card aspect-[3/4] bg-gradient-to-br from-accent/20 to-primary-light/20 backdrop-blur-sm border-2 border-primary/10">
               <div className="absolute inset-0 bg-gradient-to-br from-accent to-primary-light opacity-10" />
               <img
-                src="/10.webp?v=1"
+                src="/about-photo.webp"
                 alt="Dr. Armghana Ali - Best Gynecologist in Islamabad"
                 className="w-full h-full object-cover relative z-10 transition-transform duration-700 hover:scale-105"
                 loading="lazy"
