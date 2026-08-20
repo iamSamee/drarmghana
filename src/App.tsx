@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -31,6 +32,7 @@ export const AppRoutes = () => (
 const App = () => (
   <BrowserRouter>
     <AppRoutes />
+    <Analytics />
   </BrowserRouter>
 );
 
