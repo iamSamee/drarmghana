@@ -23,11 +23,20 @@
 
     <!-- Google Tag Manager + Meta Pixel: the dataLayer array and fbq() queue
          shim below are near-free (just define a queue), so they stay eager —
-         trackConversion()/fbq() calls from early clicks still queue correctly.
-         Only the actual gtm.js/fbevents.js downloads (the expensive part —
-         this is what shows up as CPU-busy time blocking LCP) are deferred to
-         idle time, since they don't need to be live before the browser is
-         done painting. -->
+         trackConversion()/fbq() calls from early clicks still queue correctly
+         (dataLayer.push works before gtm.js exists; GTM drains the queued
+         array once it loads).
+         The actual gtm.js/fbevents.js downloads are what cost ~1.1s of
+         main-thread script evaluation (measured via PageSpeed Insights —
+         GTM + GA4 gtag.js + Ads gtag.js + fbevents.js + fb signals/config
+         combined dwarf this app's own JS). Loading them on first user
+         interaction (scroll/touch/mouse/key) keeps that cost off the initial
+         load — the window Lighthouse/CWV measures for TBT — without losing
+         any conversions, since every tracked click already queues into
+         dataLayer/fbq regardless of when the scripts actually load. A capped
+         idle/timeout fallback still loads them for visitors who never
+         interact (e.g. they read the page and leave), so PageView firing
+         isn't skipped outright. -->
     <script>
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
@@ -52,11 +61,31 @@
       document.head.appendChild(pixel);
     }
 
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadDeferredThirdPartyScripts, { timeout: 2000 });
-    } else {
-      setTimeout(loadDeferredThirdPartyScripts, 1500);
-    }
+    (function () {
+      var loaded = false;
+      var interactionEvents = ['scroll', 'touchstart', 'mousemove', 'keydown'];
+
+      function triggerLoad() {
+        if (loaded) return;
+        loaded = true;
+        interactionEvents.forEach(function (evt) {
+          window.removeEventListener(evt, triggerLoad);
+        });
+        loadDeferredThirdPartyScripts();
+      }
+
+      interactionEvents.forEach(function (evt) {
+        window.addEventListener(evt, triggerLoad, { passive: true, once: true });
+      });
+
+      // Safety net for visitors who never interact (e.g. they read and leave)
+      // so PageView / dataLayer events still fire without waiting forever.
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(triggerLoad, { timeout: 4000 });
+      } else {
+        setTimeout(triggerLoad, 4000);
+      }
+    })();
     </script>
 
   <meta name="description" content="Consult the best gynecologist in Islamabad for PCOS, pregnancy care and women's health. MBBS, FCPS qualified. Book your appointment today." />
