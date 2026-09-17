@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { Navigation } from "lucide-react";
 import {
   PINK, GREEN_WA, PHONE_DISPLAY, PHONE_HREF, WA_HREF, DIRECTIONS_URL,
@@ -8,25 +8,25 @@ import {
 } from "@/components/gynecologist-islamabad/shared";
 import { trackPhoneCall, trackWhatsAppClick } from "@/utils/tracking";
 
-// Below-the-fold sections: code-split so the browser only has to hydrate the
-// hero on initial load. Full markup still lands in the prerendered HTML
-// (entry-server.tsx streams via renderToPipeableStream + onAllReady, which
-// waits for every Suspense boundary to resolve before we capture output) —
-// crawlers and ad-quality evaluators still see complete content, only the
-// client-side hydration cost is deferred. Verified clean hydration (no
-// mismatch warnings) against a static server that resolves clean URLs the
-// way Vercel does — `vite preview` alone gives a false positive here since
-// it SPA-falls-back to the homepage's index.html for unknown paths.
-const QuickActionTiles = lazy(() => import("@/components/gynecologist-islamabad/QuickActionTiles"));
-const LocationSection = lazy(() => import("@/components/gynecologist-islamabad/LocationSection"));
-const AvailabilityStrip = lazy(() => import("@/components/gynecologist-islamabad/AvailabilityStrip"));
-const AboutSection = lazy(() => import("@/components/gynecologist-islamabad/AboutSection"));
-const ServicesSection = lazy(() => import("@/components/gynecologist-islamabad/ServicesSection"));
-const HowToBookSection = lazy(() => import("@/components/gynecologist-islamabad/HowToBookSection"));
-const ReviewsSection = lazy(() => import("@/components/gynecologist-islamabad/ReviewsSection"));
-const FAQSection = lazy(() => import("@/components/gynecologist-islamabad/FAQSection"));
-const BookingFormSection = lazy(() => import("@/components/gynecologist-islamabad/BookingFormSection"));
-const PageFooter = lazy(() => import("@/components/gynecologist-islamabad/PageFooter"));
+// Below-the-fold sections live in their own files for organization, but are
+// imported eagerly (not React.lazy()) — measured on the live site via
+// PageSpeed Insights, lazy-splitting them into 10 chunks made mobile TBT
+// *worse* (600ms -> 900ms) and dropped the performance score (80 -> 72).
+// mainthread-work-breakdown showed Script Evaluation rising ~300ms: the
+// fixed per-module/per-lazy-boundary overhead of 10 small chunks outweighed
+// the intended win at this page's content size. Plain imports measured
+// better; revisit chunking only if a section grows large enough to justify
+// the per-boundary cost.
+import QuickActionTiles from "@/components/gynecologist-islamabad/QuickActionTiles";
+import LocationSection from "@/components/gynecologist-islamabad/LocationSection";
+import AvailabilityStrip from "@/components/gynecologist-islamabad/AvailabilityStrip";
+import AboutSection from "@/components/gynecologist-islamabad/AboutSection";
+import ServicesSection from "@/components/gynecologist-islamabad/ServicesSection";
+import HowToBookSection from "@/components/gynecologist-islamabad/HowToBookSection";
+import ReviewsSection from "@/components/gynecologist-islamabad/ReviewsSection";
+import FAQSection from "@/components/gynecologist-islamabad/FAQSection";
+import BookingFormSection from "@/components/gynecologist-islamabad/BookingFormSection";
+import PageFooter from "@/components/gynecologist-islamabad/PageFooter";
 
 export default function GynecologistIslamabad() {
   useEffect(() => {
@@ -348,19 +348,17 @@ export default function GynecologistIslamabad() {
         </div>
       </section>
 
-      {/* ═══════════ BELOW-THE-FOLD: code-split, streamed into SSR ═══════════ */}
-      <Suspense fallback={null}>
-        <QuickActionTiles />
-        <LocationSection />
-        <AvailabilityStrip />
-        <AboutSection />
-        <ServicesSection />
-        <HowToBookSection />
-        <ReviewsSection />
-        <FAQSection />
-        <BookingFormSection />
-        <PageFooter />
-      </Suspense>
+      {/* ═══════════════════ BELOW-THE-FOLD SECTIONS ═══════════════════ */}
+      <QuickActionTiles />
+      <LocationSection />
+      <AvailabilityStrip />
+      <AboutSection />
+      <ServicesSection />
+      <HowToBookSection />
+      <ReviewsSection />
+      <FAQSection />
+      <BookingFormSection />
+      <PageFooter />
 
       {/* ═══════════════════ FLOATING BUTTONS (desktop only) ═══════════════════ */}
       <div className="hidden sm:flex fixed bottom-6 right-6 z-50 flex-col gap-3">
