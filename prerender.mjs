@@ -50,7 +50,7 @@ for (const route of routes) {
   const dir = join(dist, route.dir);
   mkdirSync(dir, { recursive: true });
 
-  const appHtml = render(`/${route.dir}`);
+  const appHtml = await render(`/${route.dir}`);
 
   let html = base
     .replace(
@@ -91,9 +91,16 @@ for (const route of routes) {
     // Inject the real, fully rendered page markup so crawlers, ad-quality
     // evaluators, and the first paint all see actual content — not an empty
     // shell waiting on JS. main.tsx hydrates onto this instead of re-rendering.
+    //
+    // Replacement must be a FUNCTION, not a string: appHtml now contains
+    // React 18 streaming Suspense markers like `<!--$-->`/`<!--/$-->`, and
+    // String.replace() treats `$`-sequences in a *string* replacement
+    // specially ($&, $$, etc.), silently mangling those markers — which
+    // broke client hydration (React errors #418/#423) until this was a
+    // function replacer, whose return value is used verbatim.
     .replace(
       '<div id="root"></div>',
-      `<div id="root">${appHtml}</div>`
+      () => `<div id="root">${appHtml}</div>`
     );
 
   html = injectFontPreloads(html);
@@ -106,8 +113,9 @@ for (const route of routes) {
 // in the base template — but it still needs its Navbar+Hero prerendered
 // (otherwise FCP/LCP wait on the full JS bundle to boot React) and the same
 // font preloads as the other routes.
+const homeAppHtml = await render('/');
 const homeHtml = injectFontPreloads(
-  base.replace('<div id="root"></div>', `<div id="root">${render('/')}</div>`)
+  base.replace('<div id="root"></div>', () => `<div id="root">${homeAppHtml}</div>`)
 );
 writeFileSync(join(dist, 'index.html'), homeHtml);
 console.log('✓ Pre-rendered: / (homepage)');
